@@ -48,3 +48,11 @@ nmap <leader>gd :YcmCompleter GetDoc<CR>
 
 let g:ycm_key_list_select_completion = ['<TAB>']
 nmap <leader>g<Space> <plug>(YCMHover)
+
+if has("autocmd")
+    augroup templates
+        autocmd BufNewFile *.* silent! execute '0r ~/.vim/templates/skeleton.'.expand("<afile>:e")
+
+        autocmd BufNewFile * %substitute#\[:VIM_EVAL:\]\(.\{-\}\)\[:END_EVAL:\]#\=eval(submatch(1))#ge
+    augroup END
+endif
